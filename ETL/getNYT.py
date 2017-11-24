@@ -41,14 +41,14 @@ def updateCheckList(ndays):
                 'isRead': False
             }
             result = CheckList.find_one({'title':articleInfos['title']})
-            if len(result) == 0:
+            if result is None:
                 CheckList.insert_one(articleInfos)
                 print('inserted: ', articleInfos['date'], articleInfos['title'])
     return print('Update Finished.')
 
 
 # Get a signle article content
-def getArticleInfosAndInsert(uid, aurl):
+def getArticleInfos(uid, aurl):
     res = r.get(aurl)
     res.encoding = 'utf-8'
     soup = BeautifulSoup(res.text, 'lxml')
@@ -85,6 +85,7 @@ def goCrawler():
     unReadList = CheckList.find({'isRead': False}, {'_id': 1, 'url': 1})
 
     for element in unReadList:
-        articleInfos = getArticleInfosAndInsert(element['_id'], element['url'])
+        articleInfos = getArticleInfos(element['_id'], element['url'])
         News.insert_one(articleInfos)
         CheckList.update_one({'_id': articleInfos['_id']}, {'$set': {'isRead': True}})
+        print("Success: ", articleInfos['date'], articleInfos['title'])
