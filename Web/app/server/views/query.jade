@@ -1,0 +1,60 @@
+doctype html
+html
+    head
+        title Welcome
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/css/bootstrap.css')
+    body
+
+block content
+
+    nav.navbar.navbar-light.bg-faded
+        h2.display-3 Query a word!
+        h3.lead Let's find the keyword you'd like to know.
+        div(style='padding-left:80%')
+    div(style="margin:50px auto").container-fluid
+        div.row
+            div#query.col-lg-4.container-fluid
+                form(action='/query',method='post')
+                    h4 Here to start!
+                    fieldset
+                        p
+                            h6 Step1 Input a Word:
+                            input(type='text' name='word' id='user_input' placeholder='Enter Here...')
+                            input(type='hidden' name='inputCatcher' id='inputCatcher' value='#{notice}')
+                            h6.text-warning One word only: sigular noun or verb root
+                        p
+                            h6 Step2 Choose Article Level:
+                            div(data-toggle="buttons")
+                                - var n = 1;
+                                    while n <= 6
+                                        label.btn.btn-primary Level #{n}
+                                            input(type="radio" name="level" value="#{n++}")
+                        p
+                            button(type='submit').btn.btn-success Lookup!
+            div#resultBlock.col-lg-8.container-fluid.float-right
+                h4 You're finding: 
+                    span#search #{notice}
+                    span#translate #{trans}
+                h6 Results:
+                div
+                    if typeof(records) != 'undefined'
+                        each val,key in records
+                            div.card
+                                div.card-header Article: #{key}
+                                    span &nbsp
+                                    span.badge.badge-default Level: #{val.Level}
+                                div#articleContent.card-block
+                                    h4.card-title #{val.Title}
+                                    p.card-text #{val.Paragraph}
+                                    a(href=val.Link, target='_blank').btn.btn-primary Link
+                            p
+    include alert
+
+block scripts
+    script(src='/js/jquery-2.2.3.min.js')
+    script(src='/js/jquery.form.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/js/queryValidator.js')
+    if typeof(notice) != 'undefined'
+        script(src='/js/highlight.js')

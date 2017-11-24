@@ -1,0 +1,40 @@
+{
+  "name": "querynews",
+  "version": "1.0.0",
+  "description": "Use keywords to find news articles",
+  "author": "Tea Lin <bestteadahan@gmail.com>",
+  "website": {
+    "url": "https://localhost:3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/bestteadahan/web_queryEnews.git"
+  },
+  "dependencies": {
+    "@google-cloud/translate": "^0.8.2",
+    "body-parser": "1.14.1",
+    "chart.js": "2.6.0",
+    "connect-mongo": "0.8.2",
+    "consolidate": "^0.15.0",
+    "cookie-parser": "1.4.0",
+    "countup.js": "1.8.5",
+    "emailjs": "^1.0.4",
+    "errorhandler": "1.4.2",
+    "express": "4.13.3",
+    "express-session": "1.11.3",
+    "fullpage.js": "2.9.4",
+    "googleapis": "19.0.0",
+    "jade": "1.11.0",
+    "jquery": "3.2.1",
+    "moment": "2.10.3",
+    "mongodb": "2.0.45",
+    "python-shell": "~0.4.0",
+    "stylus": "0.52.4"
+  },
+  "engines": {
+    "node": "4.2.1"
+  },
+  "scripts": {
+    "start": "nodemon app.js"
+  }
+}
