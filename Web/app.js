@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.locals.pretty = true;
-app.set('ip','127.0.0.1');
+app.set('ip','localhost');
 app.set('port', process.env.PORT || 8000);
 app.set('views', __dirname + '/app/server/views');
 app.set('view engine', 'jade');
